@@ -16,7 +16,40 @@ import QuizFinished from "./components/QuizFinished";
 import QuizFinishedDetail from "./components/QuizFinishedDetail";
 import AddDeck from "./components/AddDeck";
 
-// const nav = createStackNavigator({});
+/*
+TODO
+***Basic views
+- redux test data
+- DeckList
+  - show all decks
+  - add new deck
+- Deck
+  - show deck data
+  - add card
+  - start quiz
+- Add Deck
+- Add Card
+- Quiz show question
+- Stop quiz
+- Quiz show answer
+- Quiz show next question
+- Quiz show Finished stats
+- Quiz show details
+
+***Data Management
+- LocalStorage
+- redux
+***Styles
+- styling of all views
+
+***Clean imports
+
+***Optional
+- Delete/Modify deck
+- Delete/Modify question
+- Randomize question order in quiz
+- Save stats from previous runs
+*/
 
 const Stack = createStackNavigator();
 
@@ -35,7 +68,6 @@ export default function App() {
           <Stack.Screen name="Question" component={QuizQuestion} />
         </Stack.Navigator>
       </NavigationContainer>
-      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
     </Provider>
   );

@@ -22,15 +22,26 @@ import {
   ActivityIndicator,
   Animated,
 } from "react-native";
+import { getDeck } from "../utils/api";
 
 class Deck extends Component {
   render() {
+    const { navigation, route } = this.props;
+    const deck = getDeck(route.params.deckId);
+
     return (
       <View>
+        <Text>{deck.title}</Text>
+        <Text>{deck.cards.length} cards</Text>
         <Button
-          title="Create New Deck"
-          onPress={() => this.props.navigation.navigate("Add Deck")}
+          title="Add Card"
+          onPress={() => navigation.navigate("Add Card")}
         />
+        <Button
+          title="Start Quiz"
+          onPress={() => navigation.navigate("Question")}
+        />
+        <Text>{JSON.stringify(this.props)}</Text>
       </View>
     );
   }

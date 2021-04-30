@@ -23,17 +23,20 @@ import {
   Animated,
 } from "react-native";
 
-class AddDeck extends Component {
-  render() {
-    return (
-      <View>
-        <Button
-          title="Create New Deck"
-          onPress={() => this.props.navigation.navigate("Add Deck")}
-        />
-      </View>
-    );
-  }
-}
+const AddDeck = ({ navigation }) => {
+  const [name, onChangeName] = React.useState(null);
+
+  const handleSubmit = (deckName) => {
+    // TODO create new
+    navigation.pop();
+  };
+
+  return (
+    <View>
+      <TextInput onChangeText={onChangeName} value={name} placeholder="Name" />
+      <Button title="Submit" onPress={() => handleSubmit(name)} />
+    </View>
+  );
+};
 
 export default connect()(AddDeck);

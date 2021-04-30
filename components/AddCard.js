@@ -23,17 +23,30 @@ import {
   Animated,
 } from "react-native";
 
-class AddCard extends Component {
-  render() {
-    return (
-      <View>
-        <Button
-          title="Back"
-          onPress={() => this.props.navigation.navigate("DeckList")}
-        />
-      </View>
-    );
-  }
-}
+const AddCard = ({ navigation }) => {
+  const [question, onChangeQuestion] = React.useState(null);
+  const [answer, onChangeAnswer] = React.useState(null);
+
+  const handleSubmit = (q, a) => {
+    // TODO create new
+    navigation.pop();
+  };
+
+  return (
+    <View>
+      <TextInput
+        onChangeText={onChangeQuestion}
+        value={question}
+        placeholder="Question"
+      />
+      <TextInput
+        onChangeText={onChangeAnswer}
+        value={answer}
+        placeholder="Answer"
+      />
+      <Button title="Submit" onPress={() => handleSubmit(question, answer)} />
+    </View>
+  );
+};
 
 export default connect()(AddCard);
