@@ -1,50 +1,34 @@
-/*
-
-decks = {
-  Deck1: {
-    title: 'Deck Name 1',
-    cards: [
-      { question: 'Question 1', answer: 'Answer 1' },
-      { question: 'Question 2', answer: 'Answer 2' },
-      { question: 'Question 3', answer: 'Answer 3' },
-    ]
-  },
-  Deck2: {...}
-}
-quiz = {
-  deck: deckId,
-  current: questionIndex,
-  answers: [true, false, true, true, ...],
-}
-
-
-Actions:
-==Decks:
-- Get All Decks () -> decks {}
-- Get Data of one Deck (deckId) -> deck {}
-
-- Add Deck (deckData)
-- *Delete Deck (deckId)
-- *Rename Deck (deckId, newName)
-- Add Question (deckId, question, answer)
-- *Delete Question (deck, questionIndex)
-==Quiz
-- Get Question Data (questionIndex) -> card {}
-- start Quiz (deckId)
-- stop Quiz ()
-- saveQuestionAnswer (questionIndex, answer: bool)
-*/
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from "../actions";
 
 function data(state = {}, action) {
+  console.log("<<<------------------------------------------reducer------"); // TODO DEL
+  console.log(state);
+  console.log(action);
+  let newState = null;
+
   switch (action.type) {
-    case "bla":
-      return {
+    case RECEIVE_DECKS:
+      newState = {
         ...state,
-        ...action.data,
+        ...action.decks,
       };
+      break;
+    case ADD_DECK:
+      newState = {
+        ...state,
+        [action.deck.title]: action.deck,
+      };
+      break;
+    case ADD_CARD:
+      newState = state;
+      break; // TODO
     default:
-      return state;
+      newState = state;
+      break;
   }
+  console.log(newState);
+  console.log("------------------------------------------reducer------>>>");
+  return newState;
 }
 
 export default data;

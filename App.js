@@ -18,37 +18,35 @@ import AddDeck from "./components/AddDeck";
 
 /*
 TODO
-***Basic views
-- redux test data
-- DeckList
-  - show all decks
-  - add new deck
-- Deck
-  - show deck data
-  - add card
-  - start quiz
-- Add Deck
-- Add Card
-- Quiz show question
-- Stop quiz
-- Quiz show answer
-- Quiz show next question
-- Quiz show Finished stats
-- Quiz show details
-
 ***Data Management
-- LocalStorage
-- redux
+- redux/localstorage functionality for all except quizzing - get, set decks data
+***Basic views
+- Quiz
+  - subnavigation to switch between questions
+  - Question
+    - question
+    - View answer
+    - Stop Quiz
+    - Progress
+  - Answer
+    - answer
+    - Correct, Incorrect buttons
+    - Stop Quiz
+  - Finished Quiz
+    - stats: correctly/incorrectly answered questions
+    - view details
+    - done
+  - Detailed stats:
+    - every question and its answer, show if was answered correctly or not
 ***Styles
-- styling of all views
-
-***Clean imports
-
+- styling of all views and elements
 ***Optional
 - Delete/Modify deck
 - Delete/Modify question
 - Randomize question order in quiz
 - Save stats from previous runs
+***Remove console.logs
+***Clean imports
 */
 
 const Stack = createStackNavigator();
