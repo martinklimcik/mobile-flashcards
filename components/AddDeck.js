@@ -22,19 +22,26 @@ import {
   ActivityIndicator,
   Animated,
 } from "react-native";
+import { addDeck } from "../utils/api";
+import { createDeck } from "../actions";
 
-const AddDeck = ({ navigation }) => {
+const AddDeck = ({ navigation, dispatch }) => {
   const [name, onChangeName] = React.useState(null);
 
-  const handleSubmit = (deckName) => {
-    // TODO create new
+  const handleSubmit = () => {
+    const newDeck = {
+      title: name,
+      cards: [],
+    };
+    addDeck(newDeck);
+    dispatch(createDeck(newDeck));
     navigation.pop();
   };
 
   return (
     <View>
       <TextInput onChangeText={onChangeName} value={name} placeholder="Name" />
-      <Button title="Submit" onPress={() => handleSubmit(name)} />
+      <Button title="Submit" onPress={() => handleSubmit()} />
     </View>
   );
 };
