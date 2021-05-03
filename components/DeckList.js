@@ -29,8 +29,6 @@ class DeckList extends Component {
   componentDidMount() {
     getAllDecks().then((decks) => {
       console.log("**************************************************");
-      console.log("componentDidMount.getAllDecks");
-      console.log(typeof decks);
       console.log(decks);
       console.log(this.props.decks);
       console.log("**************************************************");
@@ -54,11 +52,11 @@ class DeckList extends Component {
   render() {
     const { navigation, decks } = this.props;
     let deckList = [];
-    console.log("======== DeckList.render");
+    /* console.log("======== DeckList.render");
     console.log(decks);
-    console.log(typeof decks);
+    console.log(typeof decks); */
     for (id of Object.keys(decks)) {
-      console.log(id);
+      //console.log(id);
       deckList.push({
         id,
         title: decks[id].title,
@@ -77,7 +75,6 @@ class DeckList extends Component {
           title="Create New Deck"
           onPress={() => navigation.navigate("Add Deck")}
         />
-        <Button title="reset" onPress={resetStorage} />
       </View>
     );
   }
@@ -95,7 +92,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   deckTitle: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: "bold",
   },
 });

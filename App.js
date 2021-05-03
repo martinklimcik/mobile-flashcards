@@ -42,7 +42,7 @@ TODO
 - styling of all views and elements
 ***Optional
 - Delete/Modify deck
-- Delete/Modify question
+- View/manage cards in deck - view, modify, delete
 - Randomize question order in quiz
 - Save stats from previous runs
 ***Remove console.logs

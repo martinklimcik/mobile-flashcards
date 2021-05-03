@@ -30,10 +30,10 @@ export function createDeck(deck) {
   };
 }
 
-export function createCard(deck, card) {
+export function createCard(deckId, card) {
   return {
     type: ADD_CARD,
-    deck,
+    deckId,
     card,
   };
 }

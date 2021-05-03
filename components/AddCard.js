@@ -22,13 +22,17 @@ import {
   ActivityIndicator,
   Animated,
 } from "react-native";
+import { createCard } from "../actions";
+import { addCard } from "../utils/api";
 
-const AddCard = ({ navigation }) => {
+const AddCard = ({ navigation, route, dispatch }) => {
   const [question, onChangeQuestion] = React.useState(null);
   const [answer, onChangeAnswer] = React.useState(null);
 
-  const handleSubmit = (q, a) => {
-    // TODO create new
+  const handleSubmit = (question, answer) => {
+    const card = { question, answer };
+    dispatch(createCard(route.params.deckId, card));
+    addCard(route.params.deckId, card);
     navigation.pop();
   };
 
