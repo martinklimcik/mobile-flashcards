@@ -23,7 +23,7 @@ import {
   Animated,
 } from "react-native";
 import { getAllDecks, resetStorage } from "../utils/api";
-import { receiveDecks } from "../actions";
+import { receiveDecks } from "../actions/decks";
 
 class DeckList extends Component {
   componentDidMount() {
@@ -52,9 +52,9 @@ class DeckList extends Component {
   render() {
     const { navigation, decks } = this.props;
     let deckList = [];
-    /* console.log("======== DeckList.render");
+    console.log("======== DeckList.render");
     console.log(decks);
-    console.log(typeof decks); */
+    console.log(typeof decks);
     for (id of Object.keys(decks)) {
       //console.log(id);
       deckList.push({
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(decks) {
+function mapStateToProps({ decks }) {
   return { decks };
 }
 

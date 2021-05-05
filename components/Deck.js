@@ -22,10 +22,20 @@ import {
   ActivityIndicator,
   Animated,
 } from "react-native";
+import { startQuiz } from "../actions/quiz";
 
 class Deck extends Component {
+  startQuiz = () => {
+    this.props.dispatch(startQuiz(this.props.deck.cards));
+    this.props.navigation.navigate("Quiz");
+  };
+
   render() {
     const { navigation, deck } = this.props;
+
+    if (deck == null) {
+      navigation.pop();
+    }
 
     return (
       <View style={styles.deck}>
@@ -37,10 +47,7 @@ class Deck extends Component {
             navigation.navigate("Add Card", { deckId: deck.title })
           }
         />
-        <Button
-          title="Start Quiz"
-          onPress={() => navigation.navigate("Question")}
-        />
+        <Button title="Start Quiz" onPress={this.startQuiz} />
       </View>
     );
   }
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(decks, { route }) {
+function mapStateToProps({ decks }, { route }) {
   return { deck: decks[route.params.deckId] };
 }
 

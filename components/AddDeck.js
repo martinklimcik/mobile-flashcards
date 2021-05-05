@@ -23,7 +23,7 @@ import {
   Animated,
 } from "react-native";
 import { addDeck } from "../utils/api";
-import { createDeck } from "../actions";
+import { createDeck } from "../actions/decks";
 
 const AddDeck = ({ navigation, dispatch }) => {
   const [name, onChangeName] = React.useState(null);

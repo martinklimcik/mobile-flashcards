@@ -10,34 +10,13 @@ import reducer from "./reducers";
 import DeckList from "./components/DeckList";
 import Deck from "./components/Deck";
 import AddCard from "./components/AddCard";
-import QuizQuestion from "./components/QuizQuestion";
-import QuizAnswer from "./components/QuizAnswer";
-import QuizFinished from "./components/QuizFinished";
-import QuizFinishedDetail from "./components/QuizFinishedDetail";
+import Quiz from "./components/Quiz";
 import AddDeck from "./components/AddDeck";
 
 /*
 TODO
-***Data Management
-- redux/localstorage functionality for all except quizzing - get, set decks data
-***Basic views
-- Quiz
-  - subnavigation to switch between questions
-  - Question
-    - question
-    - View answer
-    - Stop Quiz
-    - Progress
-  - Answer
-    - answer
-    - Correct, Incorrect buttons
-    - Stop Quiz
-  - Finished Quiz
-    - stats: correctly/incorrectly answered questions
-    - view details
-    - done
-  - Detailed stats:
-    - every question and its answer, show if was answered correctly or not
+- disable start quiz button if there are no cards
+***notifications
 ***Styles
 - styling of all views and elements
 ***Optional
@@ -45,8 +24,10 @@ TODO
 - View/manage cards in deck - view, modify, delete
 - Randomize question order in quiz
 - Save stats from previous runs
+- Quiz progress visualise - progress bar
 ***Remove console.logs
 ***Clean imports
+***Readme
 */
 
 const Stack = createStackNavigator();
@@ -60,10 +41,7 @@ export default function App() {
           <Stack.Screen name="Deck" component={Deck} />
           <Stack.Screen name="Add Card" component={AddCard} />
           <Stack.Screen name="Add Deck" component={AddDeck} />
-          <Stack.Screen name="Quiz Detail" component={QuizFinishedDetail} />
-          <Stack.Screen name="Finished Quiz" component={QuizFinished} />
-          <Stack.Screen name="Answer" component={QuizAnswer} />
-          <Stack.Screen name="Question" component={QuizQuestion} />
+          <Stack.Screen name="Quiz" component={Quiz} />
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />

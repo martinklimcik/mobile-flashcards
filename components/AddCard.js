@@ -22,7 +22,7 @@ import {
   ActivityIndicator,
   Animated,
 } from "react-native";
-import { createCard } from "../actions";
+import { createCard } from "../actions/decks";
 import { addCard } from "../utils/api";
 
 const AddCard = ({ navigation, route, dispatch }) => {
