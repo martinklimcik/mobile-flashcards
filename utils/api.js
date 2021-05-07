@@ -2,18 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "MobileFlashcards:Decks";
 
-/* let testdataquiz = {
-  deck: null,
-  currentQuestion: null,
-  answers: [],
-}; */
-
-/// https://react-native-async-storage.github.io/async-storage/docs/api
-
 function parseData(data) {
-  console.log("LOADED DECKS DATA");
-  console.log(data);
-  console.log("_______________________________");
   return JSON.parse(data);
 }
 

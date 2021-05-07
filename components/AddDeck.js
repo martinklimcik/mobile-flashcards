@@ -24,6 +24,7 @@ import {
 } from "react-native";
 import { addDeck } from "../utils/api";
 import { createDeck } from "../actions/decks";
+import globalStyle from "../style";
 
 const AddDeck = ({ navigation, dispatch }) => {
   const [name, onChangeName] = React.useState(null);
@@ -40,8 +41,18 @@ const AddDeck = ({ navigation, dispatch }) => {
 
   return (
     <View>
-      <TextInput onChangeText={onChangeName} value={name} placeholder="Name" />
-      <Button title="Submit" onPress={() => handleSubmit()} />
+      <TextInput
+        style={globalStyle.input}
+        autoFocus={true}
+        onChangeText={onChangeName}
+        value={name}
+        placeholder="Name"
+      />
+      <TouchableOpacity onPress={() => handleSubmit()}>
+        <View style={globalStyle.button}>
+          <Text style={globalStyle.buttonText}>Confirm</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

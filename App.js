@@ -1,6 +1,5 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
@@ -16,6 +15,7 @@ import AddDeck from "./components/AddDeck";
 /*
 TODO
 - disable start quiz button if there are no cards
+- disable confirm buttons on add card/deck if input is not valid
 ***notifications
 ***Styles
 - styling of all views and elements
@@ -48,12 +48,3 @@ export default function App() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

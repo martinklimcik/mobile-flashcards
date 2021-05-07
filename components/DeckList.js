@@ -22,16 +22,14 @@ import {
   ActivityIndicator,
   Animated,
 } from "react-native";
-import { getAllDecks, resetStorage } from "../utils/api";
+import { getAllDecks } from "../utils/api";
 import { receiveDecks } from "../actions/decks";
+import globalStyle from "../style";
+import { formatNoun } from "../utils/helpers";
 
 class DeckList extends Component {
   componentDidMount() {
     getAllDecks().then((decks) => {
-      console.log("**************************************************");
-      console.log(decks);
-      console.log(this.props.decks);
-      console.log("**************************************************");
       this.props.dispatch(receiveDecks(decks));
     });
   }
@@ -44,7 +42,9 @@ class DeckList extends Component {
     <TouchableNativeFeedback onPress={() => this.showDeck(item.id)}>
       <View style={styles.deck}>
         <Text style={styles.deckTitle}>{item.title}</Text>
-        <Text>{item.cardCount} cards</Text>
+        <Text style={styles.deckInfo}>
+          {formatNoun(item.cardCount, "card")}
+        </Text>
       </View>
     </TouchableNativeFeedback>
   );
@@ -56,7 +56,6 @@ class DeckList extends Component {
     console.log(decks);
     console.log(typeof decks);
     for (id of Object.keys(decks)) {
-      //console.log(id);
       deckList.push({
         id,
         title: decks[id].title,
@@ -66,14 +65,15 @@ class DeckList extends Component {
 
     return (
       <View>
+        <TouchableOpacity onPress={() => navigation.navigate("Add Deck")}>
+          <View style={globalStyle.button}>
+            <Text style={globalStyle.buttonText}>Create New Deck</Text>
+          </View>
+        </TouchableOpacity>
         <FlatList
           data={deckList}
           renderItem={this.renderDeck}
           keyExtractor={(item) => item.id}
-        />
-        <Button
-          title="Create New Deck"
-          onPress={() => navigation.navigate("Add Deck")}
         />
       </View>
     );
@@ -82,7 +82,8 @@ class DeckList extends Component {
 
 const styles = StyleSheet.create({
   deck: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFD662FF",
+    textDecorationColor: "#00539CFF",
     alignItems: "center",
     justifyContent: "center",
     borderColor: "black",
@@ -90,10 +91,16 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 5,
     padding: 5,
+    borderRadius: 10,
   },
   deckTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
+    color: "#00539CFF",
+  },
+  deckInfo: {
+    fontSize: 16,
+    fontStyle: "italic",
   },
 });
 

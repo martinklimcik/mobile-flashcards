@@ -23,6 +23,8 @@ import {
   Animated,
 } from "react-native";
 import { startQuiz } from "../actions/quiz";
+import globalStyle from "../style";
+import { formatNoun } from "../utils/helpers";
 
 class Deck extends Component {
   startQuiz = () => {
@@ -35,19 +37,31 @@ class Deck extends Component {
 
     if (deck == null) {
       navigation.pop();
+      return null;
     }
 
     return (
       <View style={styles.deck}>
         <Text style={styles.title}>{deck.title}</Text>
-        <Text style={styles.count}>{deck.cards.length} cards</Text>
-        <Button
-          title="Add Card"
+        <Text style={styles.count}>
+          {formatNoun(deck.cards.length, "card")}
+        </Text>
+        <TouchableOpacity
           onPress={() =>
             navigation.navigate("Add Card", { deckId: deck.title })
           }
-        />
-        <Button title="Start Quiz" onPress={this.startQuiz} />
+        >
+          <View style={globalStyle.button}>
+            <Text style={globalStyle.buttonText}>Add Card</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.startQuiz}>
+          <View style={[globalStyle.button, styles.quizBtn]}>
+            <Text style={[globalStyle.buttonText, styles.quizBtnText]}>
+              Start Quiz
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -56,18 +70,27 @@ class Deck extends Component {
 const styles = StyleSheet.create({
   deck: {
     backgroundColor: "#fff",
-    alignItems: "center",
     borderColor: "black",
     borderWidth: 0,
-    flex: 1,
+    alignItems: "stretch",
   },
   title: {
-    fontSize: 20,
+    fontSize: 35,
     fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 10,
   },
   count: {
-    fontSize: 15,
+    fontSize: 23,
     fontStyle: "italic",
+    textAlign: "center",
+    marginVertical: 20,
+  },
+  quizBtn: {
+    backgroundColor: "#00539CFF",
+  },
+  quizBtnText: {
+    color: "#EEA47FFF",
   },
 });
 
