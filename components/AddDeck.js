@@ -25,9 +25,10 @@ import {
 import { addDeck } from "../utils/api";
 import { createDeck } from "../actions/decks";
 import globalStyle from "../style";
+import CustomButton from "./Button";
 
 const AddDeck = ({ navigation, dispatch }) => {
-  const [name, onChangeName] = React.useState(null);
+  const [name, onChangeName] = React.useState("");
 
   const handleSubmit = () => {
     const newDeck = {
@@ -48,11 +49,11 @@ const AddDeck = ({ navigation, dispatch }) => {
         value={name}
         placeholder="Name"
       />
-      <TouchableOpacity onPress={() => handleSubmit()}>
-        <View style={globalStyle.button}>
-          <Text style={globalStyle.buttonText}>Confirm</Text>
-        </View>
-      </TouchableOpacity>
+      <CustomButton
+        onPress={() => handleSubmit()}
+        disabled={name === ""}
+        text="Confirm"
+      />
     </View>
   );
 };

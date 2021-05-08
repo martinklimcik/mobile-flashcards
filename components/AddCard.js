@@ -25,10 +25,11 @@ import {
 import { createCard } from "../actions/decks";
 import { addCard } from "../utils/api";
 import globalStyle from "../style";
+import CustomButton from "./Button";
 
 const AddCard = ({ navigation, route, dispatch }) => {
-  const [question, onChangeQuestion] = React.useState(null);
-  const [answer, onChangeAnswer] = React.useState(null);
+  const [question, onChangeQuestion] = React.useState("");
+  const [answer, onChangeAnswer] = React.useState("");
 
   const handleSubmit = () => {
     const card = { question, answer };
@@ -40,6 +41,7 @@ const AddCard = ({ navigation, route, dispatch }) => {
   return (
     <View>
       <TextInput
+        multiline
         style={globalStyle.input}
         autoFocus={true}
         onChangeText={onChangeQuestion}
@@ -47,16 +49,17 @@ const AddCard = ({ navigation, route, dispatch }) => {
         placeholder="Question"
       />
       <TextInput
+        multiline
         style={globalStyle.input}
         onChangeText={onChangeAnswer}
         value={answer}
         placeholder="Answer"
       />
-      <TouchableOpacity onPress={() => handleSubmit()}>
-        <View style={globalStyle.button}>
-          <Text style={globalStyle.buttonText}>Confirm</Text>
-        </View>
-      </TouchableOpacity>
+      <CustomButton
+        text="Confirm"
+        onPress={() => handleSubmit()}
+        disabled={question === "" || answer === ""}
+      />
     </View>
   );
 };

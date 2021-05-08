@@ -25,6 +25,7 @@ import {
 import { startQuiz } from "../actions/quiz";
 import globalStyle from "../style";
 import { formatNoun } from "../utils/helpers";
+import CustomButton from "./Button";
 
 class Deck extends Component {
   startQuiz = () => {
@@ -35,33 +36,25 @@ class Deck extends Component {
   render() {
     const { navigation, deck } = this.props;
 
-    if (deck == null) {
-      navigation.pop();
-      return null;
-    }
-
     return (
       <View style={styles.deck}>
         <Text style={styles.title}>{deck.title}</Text>
         <Text style={styles.count}>
           {formatNoun(deck.cards.length, "card")}
         </Text>
-        <TouchableOpacity
+        <CustomButton
+          text="Add Card"
           onPress={() =>
             navigation.navigate("Add Card", { deckId: deck.title })
           }
-        >
-          <View style={globalStyle.button}>
-            <Text style={globalStyle.buttonText}>Add Card</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.startQuiz}>
-          <View style={[globalStyle.button, styles.quizBtn]}>
-            <Text style={[globalStyle.buttonText, styles.quizBtnText]}>
-              Start Quiz
-            </Text>
-          </View>
-        </TouchableOpacity>
+        />
+        <CustomButton
+          text="Start Quiz"
+          onPress={this.startQuiz}
+          disabled={deck.cards.length === 0}
+          buttonStyle={styles.quizBtn}
+          textStyle={styles.quizBtnText}
+        />
       </View>
     );
   }
@@ -87,9 +80,11 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   quizBtn: {
+    ...globalStyle.button,
     backgroundColor: "#00539CFF",
   },
   quizBtnText: {
+    ...globalStyle.buttonText,
     color: "#EEA47FFF",
   },
 });

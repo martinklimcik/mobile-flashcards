@@ -26,6 +26,7 @@ import { getAllDecks } from "../utils/api";
 import { receiveDecks } from "../actions/decks";
 import globalStyle from "../style";
 import { formatNoun } from "../utils/helpers";
+import CustomButton from "./Button";
 
 class DeckList extends Component {
   componentDidMount() {
@@ -65,11 +66,10 @@ class DeckList extends Component {
 
     return (
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Add Deck")}>
-          <View style={globalStyle.button}>
-            <Text style={globalStyle.buttonText}>Create New Deck</Text>
-          </View>
-        </TouchableOpacity>
+        <CustomButton
+          onPress={() => navigation.navigate("Add Deck")}
+          text="Create New Deck"
+        />
         <FlatList
           data={deckList}
           renderItem={this.renderDeck}
@@ -82,7 +82,7 @@ class DeckList extends Component {
 
 const styles = StyleSheet.create({
   deck: {
-    backgroundColor: "#FFD662FF",
+    backgroundColor: "white",
     textDecorationColor: "#00539CFF",
     alignItems: "center",
     justifyContent: "center",
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   deckTitle: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#00539CFF",
+    color: "black",
   },
   deckInfo: {
     fontSize: 16,

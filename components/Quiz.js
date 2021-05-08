@@ -56,13 +56,13 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
             <Text style={styles.cardText}>{card.answer}</Text>
           </View>
           <TouchableOpacity onPress={() => handleAnswer(true)}>
-            <View style={[globalStyle.button, styles.rightButton]}>
-              <Text style={[globalStyle.buttonText]}>Correct</Text>
+            <View style={styles.rightButton}>
+              <Text style={globalStyle.buttonText}>Correct</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleAnswer(false)}>
-            <View style={[globalStyle.button, styles.wrongButton]}>
-              <Text style={[globalStyle.buttonText]}>Incorrect</Text>
+            <View style={styles.wrongButton}>
+              <Text style={globalStyle.buttonText}>Incorrect</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -75,9 +75,7 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
           onPress={backToDeck}
           style={[globalStyle.button, styles.button]}
         >
-          <Text style={[globalStyle.buttonText, styles.buttonText]}>
-            Stop Quiz
-          </Text>
+          <Text style={styles.buttonText}>Stop Quiz</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -89,21 +87,14 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
       <Text style={styles.resultText}>
         Success rate: {(quiz.right / quiz.cards.length) * 100} %
       </Text>
-      <TouchableOpacity
-        onPress={backToDeck}
-        style={[globalStyle.button, styles.button]}
-      >
-        <Text style={[globalStyle.buttonText, styles.buttonText]}>
-          Back to Deck
-        </Text>
+      <TouchableOpacity onPress={backToDeck} style={styles.button}>
+        <Text style={styles.buttonText}>Back to Deck</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => dispatch(startQuiz(quiz.cards))}
-        style={[globalStyle.button, styles.button]}
+        style={styles.button}
       >
-        <Text style={[globalStyle.buttonText, styles.buttonText]}>
-          Restart Quiz
-        </Text>
+        <Text style={styles.buttonText}>Restart Quiz</Text>
       </TouchableOpacity>
     </View>
   );
@@ -124,7 +115,7 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "#078282FF",
+    color: "black",
     marginVertical: 30,
   },
   cardInfo: {
@@ -139,18 +130,22 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   button: {
+    ...globalStyle.button,
     backgroundColor: "#00539CFF",
     alignSelf: "center",
   },
   buttonText: {
+    ...globalStyle.buttonText,
     color: "#EEA47FFF",
   },
   rightButton: {
+    ...globalStyle.button,
     backgroundColor: "#abebc6",
     borderColor: "#58d68d",
     borderWidth: 1,
   },
   wrongButton: {
+    ...globalStyle.button,
     backgroundColor: "#f5b7b1",
     borderColor: "#ec7063",
     borderWidth: 1,

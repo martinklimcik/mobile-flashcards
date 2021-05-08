@@ -14,20 +14,20 @@ import AddDeck from "./components/AddDeck";
 
 /*
 TODO
-- disable start quiz button if there are no cards
-- disable confirm buttons on add card/deck if input is not valid
-***notifications
-***Styles
-- styling of all views and elements
+- card animation
+- notification
 ***Optional
 - Delete/Modify deck
 - View/manage cards in deck - view, modify, delete
 - Randomize question order in quiz
 - Save stats from previous runs
 - Quiz progress visualise - progress bar
-***Remove console.logs
-***Clean imports
-***Readme
+- Button styles refactor - button styles from globaStyle to CustomButton, export buttonStyle, pass to CustomButton only changes to default style
+***Cleanup
+- Remove console.logs + reducers refactor
+- Function comments
+- Clean imports
+- Readme
 */
 
 const Stack = createStackNavigator();
