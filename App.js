@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,10 +11,10 @@ import Deck from "./components/Deck";
 import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
 import AddDeck from "./components/AddDeck";
+import { setLocalNotification } from "./utils/helpers";
 
 /*
 TODO
-- notification
 ***Optional
 - Delete/Modify deck
 - View/manage cards in deck - view, modify, delete
@@ -32,6 +32,10 @@ TODO
 const Stack = createStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    setLocalNotification();
+  });
+
   return (
     <Provider store={createStore(reducer)}>
       <NavigationContainer>

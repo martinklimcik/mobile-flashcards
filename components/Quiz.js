@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   Button,
@@ -26,12 +26,14 @@ import { nextQuestion, startQuiz } from "../actions/quiz";
 import globalStyle from "../style";
 import FlipCard from "react-native-flip-card";
 import CustomButton from "./Button";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 const Quiz = ({ quiz, navigation, dispatch }) => {
   const [isButtonsShown, showButtons] = React.useState(false);
   const index = quiz.current + 1;
   const total = quiz.cards.length;
   const card = quiz.cards[quiz.current];
+  const quizInProgress = index <= total;
 
   function handleAnswer(answer) {
     showButtons(false);
@@ -42,7 +44,13 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
     navigation.pop();
   }
 
-  return index <= total ? (
+  useEffect(() => {
+    if (!quizInProgress) {
+      clearLocalNotification().then(setLocalNotification);
+    }
+  });
+
+  return quizInProgress ? (
     // quiz in progress
     <View>
       <View style={styles.cardView}>
