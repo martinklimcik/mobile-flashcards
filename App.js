@@ -15,13 +15,6 @@ import { setLocalNotification } from "./utils/helpers";
 
 /*
 TODO
-***Optional
-- Delete/Modify deck
-- View/manage cards in deck - view, modify, delete
-- Randomize question order in quiz
-- Save stats from previous runs
-- Quiz progress visualise - progress bar
-- Button styles refactor - button styles from globaStyle to CustomButton, export buttonStyle, pass to CustomButton only changes to default style
 ***Cleanup
 - Remove console.logs + reducers refactor
 - Function comments

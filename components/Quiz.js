@@ -92,8 +92,8 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
         <CustomButton
           text="Stop Quiz"
           onPress={backToDeck}
-          buttonStyle={styles.button}
-          textStyle={styles.buttonText}
+          buttonStyle={globalStyle.buttonBlue}
+          textStyle={globalStyle.buttonTextBlue}
         />
       </View>
     </View>
@@ -109,14 +109,14 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
       <CustomButton
         text="Back to Deck"
         onPress={backToDeck}
-        buttonStyle={styles.button}
-        textStyle={styles.buttonText}
+        buttonStyle={globalStyle.buttonBlue}
+        textStyle={globalStyle.buttonTextBlue}
       />
       <CustomButton
         text="Restart Quiz"
         onPress={() => dispatch(startQuiz(quiz.cards))}
-        buttonStyle={styles.button}
-        textStyle={styles.buttonText}
+        buttonStyle={globalStyle.buttonBlue}
+        textStyle={globalStyle.buttonTextBlue}
       />
     </View>
   );
@@ -157,23 +157,14 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignSelf: "center",
   },
-  button: {
-    ...globalStyle.button,
-    backgroundColor: "#00539CFF",
-    alignSelf: "center",
-  },
-  buttonText: {
-    ...globalStyle.buttonText,
-    color: "#EEA47FFF",
-  },
   rightButton: {
-    ...globalStyle.button,
+    ...globalStyle.buttonGreen,
     backgroundColor: "#abebc6",
     borderColor: "#58d68d",
     borderWidth: 1,
   },
   wrongButton: {
-    ...globalStyle.button,
+    ...globalStyle.buttonGreen,
     backgroundColor: "#f5b7b1",
     borderColor: "#ec7063",
     borderWidth: 1,

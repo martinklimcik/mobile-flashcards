@@ -24,9 +24,6 @@ export function clearLocalNotification() {
 
 /** Sets new notification */
 export function setLocalNotification() {
-  Notifications.getAllScheduledNotificationsAsync().then((results) => {
-    console.log(results);
-  });
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
     .then((data) => {

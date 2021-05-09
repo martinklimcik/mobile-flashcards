@@ -1,25 +1,10 @@
-import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from "../actions/decks";
+import {
+  RECEIVE_DECKS,
+  ADD_DECK,
+  ADD_CARD,
+  DELETE_DECK,
+} from "../actions/decks";
 
-/*
-decks: {
-  'deck1': {
-    title: 'deck1',
-    cards: [
-      {
-        question: 'What is the answer to life, the universe and everything?',
-        answer: '42'
-      },
-      {...},
-      ...
-    ]
-  },
-  'deck2': {
-    title: 'deck2',
-    cards: [...]
-  },
-  ...
-}
-*/
 function decks(state = {}, action) {
   console.log("<<<------------------------------------reducer_decks------"); // TODO DEL
   console.log(state);
@@ -47,6 +32,11 @@ function decks(state = {}, action) {
         },
       };
       break; // TODO
+    case DELETE_DECK:
+      newState = { ...state };
+      newState[action.deckId] = undefined;
+      delete newState[action.deckId];
+      break;
     default:
       newState = { ...state };
       break;

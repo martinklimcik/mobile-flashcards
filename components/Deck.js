@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   Button,
@@ -21,44 +21,72 @@ import {
   StatusBar,
   ActivityIndicator,
   Animated,
+  Alert,
 } from "react-native";
 import { startQuiz } from "../actions/quiz";
 import globalStyle from "../style";
 import { formatNoun } from "../utils/helpers";
 import CustomButton from "./Button";
+import { deleteDeck } from "../actions/decks";
+import { removeDeck } from "../utils/api";
 
-class Deck extends Component {
-  startQuiz = () => {
-    this.props.dispatch(startQuiz(this.props.deck.cards));
-    this.props.navigation.navigate("Quiz");
+const Deck = ({ navigation, deck, dispatch }) => {
+  if (deck == null) return null;
+  const cardCount = deck.cards.length;
+
+  const handleStartQuiz = () => {
+    dispatch(startQuiz(deck.cards));
+    navigation.navigate("Quiz");
   };
 
-  render() {
-    const { navigation, deck } = this.props;
+  const _deleteDeck = () => {
+    navigation.pop();
+    removeDeck(deck.title);
+    dispatch(deleteDeck(deck.title));
+  };
 
-    return (
-      <View style={styles.deck}>
-        <Text style={styles.title}>{deck.title}</Text>
-        <Text style={styles.count}>
-          {formatNoun(deck.cards.length, "card")}
-        </Text>
-        <CustomButton
-          text="Add Card"
-          onPress={() =>
-            navigation.navigate("Add Card", { deckId: deck.title })
-          }
-        />
-        <CustomButton
-          text="Start Quiz"
-          onPress={this.startQuiz}
-          disabled={deck.cards.length === 0}
-          buttonStyle={styles.quizBtn}
-          textStyle={styles.quizBtnText}
-        />
-      </View>
+  const handleDeleteDeck = () => {
+    Alert.alert(
+      "Delete deck",
+      `Are you sure you want to delete deck ${deck.title} ${
+        cardCount > 0 ? " and its " + formatNoun(cardCount, "card") : ""
+      }?`,
+      [
+        {
+          text: "Cancel",
+        },
+        {
+          text: "Delete",
+          onPress: _deleteDeck,
+        },
+      ]
     );
-  }
-}
+  };
+
+  return (
+    <View style={styles.deck}>
+      <Text style={styles.title}>{deck.title}</Text>
+
+      <Text style={styles.count}>{formatNoun(cardCount, "card")}</Text>
+      <CustomButton
+        text="Add Card"
+        onPress={() => navigation.navigate("Add Card", { deckId: deck.title })}
+      />
+      <CustomButton
+        text="Delete deck"
+        onPress={handleDeleteDeck}
+        buttonStyle={globalStyle.buttonRed}
+      />
+      <CustomButton
+        text="Start Quiz"
+        onPress={handleStartQuiz}
+        disabled={cardCount === 0}
+        buttonStyle={globalStyle.buttonBlue}
+        textStyle={globalStyle.buttonTextBlue}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   deck: {
@@ -78,14 +106,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     textAlign: "center",
     marginVertical: 20,
-  },
-  quizBtn: {
-    ...globalStyle.button,
-    backgroundColor: "#00539CFF",
-  },
-  quizBtnText: {
-    ...globalStyle.buttonText,
-    color: "#EEA47FFF",
   },
 });
 

@@ -5,7 +5,7 @@ const CustomButton = ({
   onPress,
   text,
   disabled = false,
-  buttonStyle = globalStyle.button,
+  buttonStyle = globalStyle.buttonGreen,
   textStyle = globalStyle.buttonText,
 }) => {
   return (

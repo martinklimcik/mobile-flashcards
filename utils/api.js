@@ -28,6 +28,14 @@ export function addCard(deckId, card) {
   });
 }
 
+export function removeDeck(deckId) {
+  getAllDecks().then((decks) => {
+    decks[deckId] = undefined;
+    delete decks[deckId];
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+  });
+}
+
 export function resetStorage() {
   AsyncStorage.removeItem(STORAGE_KEY);
 }
