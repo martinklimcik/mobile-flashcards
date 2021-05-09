@@ -13,15 +13,6 @@ import Quiz from "./components/Quiz";
 import AddDeck from "./components/AddDeck";
 import { setLocalNotification } from "./utils/helpers";
 
-/*
-TODO
-***Cleanup
-- Remove console.logs + reducers refactor
-- Function comments
-- Clean imports
-- Readme
-*/
-
 const Stack = createStackNavigator();
 
 export default function App() {

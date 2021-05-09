@@ -1,26 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  Button,
-  TouchableHighlight,
-  TouchableOpacity,
   TouchableNativeFeedback,
-  TouchableWithoutFeedback,
-  ScrollView,
   FlatList,
-  SectionList,
-  TextInput,
-  KeyboardAvoidingView,
-  Switch,
-  Image,
   StyleSheet,
   Text,
   View,
-  Platform,
-  Dimensions,
-  StatusBar,
-  ActivityIndicator,
-  Animated,
 } from "react-native";
 import { getAllDecks } from "../utils/api";
 import { receiveDecks } from "../actions/decks";
@@ -52,9 +37,6 @@ class DeckList extends Component {
   render() {
     const { navigation, decks } = this.props;
     let deckList = [];
-    console.log("======== DeckList.render");
-    console.log(decks);
-    console.log(typeof decks);
     for (id of Object.keys(decks)) {
       deckList.push({
         id,

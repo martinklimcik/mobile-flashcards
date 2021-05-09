@@ -1,27 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  Button,
-  TouchableHighlight,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  TouchableWithoutFeedback,
-  ScrollView,
-  FlatList,
-  SectionList,
-  TextInput,
-  KeyboardAvoidingView,
-  Switch,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  Dimensions,
-  StatusBar,
-  ActivityIndicator,
-  Animated,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { nextQuestion, startQuiz } from "../actions/quiz";
 import globalStyle from "../style";
 import FlipCard from "react-native-flip-card";
@@ -101,10 +80,10 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
     // quiz finished
     <View style={{ alignItems: "center" }}>
       <Text style={styles.resultHeader}>Results</Text>
-      <Text style={styles.resultText}>Correct Answers: {quiz.right}</Text>
-      <Text style={styles.resultText}>Incorrect Answers: {quiz.wrong}</Text>
+      <Text style={styles.resultText}>Correct answers: {quiz.right}</Text>
+      <Text style={styles.resultText}>Incorrect answers: {quiz.wrong}</Text>
       <Text style={styles.resultText}>
-        Success rate: {(quiz.right / quiz.cards.length) * 100} %
+        Success rate: {((quiz.right / quiz.cards.length) * 100).toFixed(1)} %
       </Text>
       <CustomButton
         text="Back to Deck"
@@ -125,7 +104,7 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
 const styles = StyleSheet.create({
   cardView: {
     borderRadius: 15,
-    height: 250,
+    height: 300,
     marginBottom: 20,
   },
 
@@ -138,7 +117,7 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 30,
     borderRadius: 15,
-    height: 250,
+    height: 300,
   },
   cardText: {
     fontSize: 30,

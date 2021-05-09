@@ -1,28 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import {
-  Button,
-  TouchableHighlight,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  TouchableWithoutFeedback,
-  ScrollView,
-  FlatList,
-  SectionList,
-  TextInput,
-  KeyboardAvoidingView,
-  Switch,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  Dimensions,
-  StatusBar,
-  ActivityIndicator,
-  Animated,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import { startQuiz } from "../actions/quiz";
 import globalStyle from "../style";
 import { formatNoun } from "../utils/helpers";
