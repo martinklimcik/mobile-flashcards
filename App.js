@@ -14,7 +14,6 @@ import AddDeck from "./components/AddDeck";
 
 /*
 TODO
-- card animation
 - notification
 ***Optional
 - Delete/Modify deck

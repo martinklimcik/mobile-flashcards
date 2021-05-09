@@ -24,16 +24,17 @@ import {
 } from "react-native";
 import { nextQuestion, startQuiz } from "../actions/quiz";
 import globalStyle from "../style";
+import FlipCard from "react-native-flip-card";
+import CustomButton from "./Button";
 
 const Quiz = ({ quiz, navigation, dispatch }) => {
-  const [flipped, flipCard] = React.useState(false);
-
+  const [isButtonsShown, showButtons] = React.useState(false);
   const index = quiz.current + 1;
   const total = quiz.cards.length;
   const card = quiz.cards[quiz.current];
 
   function handleAnswer(answer) {
-    flipCard(false);
+    showButtons(false);
     dispatch(nextQuestion(answer));
   }
 
@@ -42,44 +43,54 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
   }
 
   return index <= total ? (
+    // quiz in progress
     <View>
-      {!flipped ? (
-        <TouchableNativeFeedback onPress={() => flipCard(true)}>
+      <View style={styles.cardView}>
+        <FlipCard
+          friction={6}
+          flipHorizontal={true}
+          flipVertical={false}
+          clickable={true}
+          flip={false}
+          onFlipStart={() => showButtons(true)}
+        >
           <View style={styles.card}>
             <Text style={styles.cardText}>{card.question}</Text>
             <Text style={styles.cardInfo}>tap to view answer</Text>
           </View>
-        </TouchableNativeFeedback>
-      ) : (
-        <View>
           <View style={styles.card}>
             <Text style={styles.cardText}>{card.answer}</Text>
           </View>
-          <TouchableOpacity onPress={() => handleAnswer(true)}>
-            <View style={styles.rightButton}>
-              <Text style={globalStyle.buttonText}>Correct</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleAnswer(false)}>
-            <View style={styles.wrongButton}>
-              <Text style={globalStyle.buttonText}>Incorrect</Text>
-            </View>
-          </TouchableOpacity>
+        </FlipCard>
+      </View>
+      {isButtonsShown ? (
+        <View>
+          <CustomButton
+            text="Correct"
+            onPress={() => handleAnswer(true)}
+            buttonStyle={styles.rightButton}
+          />
+          <CustomButton
+            text="Incorrect"
+            onPress={() => handleAnswer(false)}
+            buttonStyle={styles.wrongButton}
+          />
         </View>
-      )}
+      ) : null}
       <View>
         <Text style={styles.progress}>
           Question {index} of {total}
         </Text>
-        <TouchableOpacity
+        <CustomButton
+          text="Stop Quiz"
           onPress={backToDeck}
-          style={[globalStyle.button, styles.button]}
-        >
-          <Text style={styles.buttonText}>Stop Quiz</Text>
-        </TouchableOpacity>
+          buttonStyle={styles.button}
+          textStyle={styles.buttonText}
+        />
       </View>
     </View>
   ) : (
+    // quiz finished
     <View style={{ alignItems: "center" }}>
       <Text style={styles.resultHeader}>Results</Text>
       <Text style={styles.resultText}>Correct Answers: {quiz.right}</Text>
@@ -87,20 +98,29 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
       <Text style={styles.resultText}>
         Success rate: {(quiz.right / quiz.cards.length) * 100} %
       </Text>
-      <TouchableOpacity onPress={backToDeck} style={styles.button}>
-        <Text style={styles.buttonText}>Back to Deck</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
+      <CustomButton
+        text="Back to Deck"
+        onPress={backToDeck}
+        buttonStyle={styles.button}
+        textStyle={styles.buttonText}
+      />
+      <CustomButton
+        text="Restart Quiz"
         onPress={() => dispatch(startQuiz(quiz.cards))}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Restart Quiz</Text>
-      </TouchableOpacity>
+        buttonStyle={styles.button}
+        textStyle={styles.buttonText}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  cardView: {
+    borderRadius: 15,
+    height: 250,
+    marginBottom: 20,
+  },
+
   card: {
     backgroundColor: "#95DBE5FF",
     borderColor: "#339E66FF",

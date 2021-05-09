@@ -24,7 +24,6 @@ import {
 } from "react-native";
 import { getAllDecks } from "../utils/api";
 import { receiveDecks } from "../actions/decks";
-import globalStyle from "../style";
 import { formatNoun } from "../utils/helpers";
 import CustomButton from "./Button";
 
