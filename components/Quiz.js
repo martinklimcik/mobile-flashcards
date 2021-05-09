@@ -66,7 +66,7 @@ const Quiz = ({ quiz, navigation, dispatch }) => {
       ) : null}
       <View>
         <Text style={styles.progress}>
-          Question {index} of {total}
+          Question {index} of {total} ({total - index} remaning)
         </Text>
         <CustomButton
           text="Stop Quiz"

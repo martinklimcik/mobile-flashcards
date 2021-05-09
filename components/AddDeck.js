@@ -14,8 +14,8 @@ const AddDeck = ({ navigation, dispatch }) => {
       title: name,
       cards: [],
     };
-    addDeck(newDeck);
     dispatch(createDeck(newDeck));
+    addDeck(newDeck);
     navigation.pop();
   };
 

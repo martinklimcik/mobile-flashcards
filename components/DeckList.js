@@ -51,11 +51,17 @@ class DeckList extends Component {
           onPress={() => navigation.navigate("Add Deck")}
           text="Create New Deck"
         />
-        <FlatList
-          data={deckList}
-          renderItem={this.renderDeck}
-          keyExtractor={(item) => item.id}
-        />
+        {deckList.length > 0 ? (
+          <FlatList
+            data={deckList}
+            renderItem={this.renderDeck}
+            keyExtractor={(item) => item.id}
+          />
+        ) : (
+          <View style={{ alignItems: "center" }}>
+            <Text style={styles.deckInfo}>There are no existing decks</Text>
+          </View>
+        )}
       </View>
     );
   }
